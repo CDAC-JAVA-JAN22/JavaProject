@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Add Flight Details</h1>
+<div mat-dialog-content>
+    <form [formGroup]="flightForm">
+    <mat-form-field appearance="outline">
+        <mat-label>Company</mat-label>
+        <mat-select formControlName="company" placeholder="Company Name">
+            <!--<mat-option value="Indigo">Indigo</mat-option>
+            <mat-option value="Air India">Air India</mat-option>
+            <mat-option value="Qatar">Qatar</mat-option>
+            <mat-option value="Vistara">Vistara</mat-option>
+            <mat-option value="SpiceJet">SpiceJet</mat-option>
+            <mat-option value="Kingfisher">Kingfisher</mat-option>
+            <mat-option value="Jet Airways">Jet Airways</mat-option>-->
+
+            <mat-option *ngFor="let company of companyData" value="{{company.companyName}}">
+              {{company.companyName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Flight Number</mat-label>
+        <input formControlName="flightNumber" matInput placeholder="flight Number">
+    </mat-form-field>
+
+    
+    <label class="example-margin">No Of Stops</label>
+      <mat-radio-group  formControlName="noOfStops" class="example-radio-group" >
+        <mat-radio-button class="example-radio-button" value="0" >Non Stop</mat-radio-button>
+        <mat-radio-button class="example-radio-button" value="1">One</mat-radio-button>
+      </mat-radio-group>
+    
+
+      <mat-form-field appearance="outline">
+      <mat-label>Select City</mat-label>
+      <mat-select  formControlName="stopName" >
+        <mat-option value="pune">Pune</mat-option>
+        <mat-option value="mumbai" >Mumbai</mat-option>
+        <mat-option value="delhi">Delhi</mat-option>
+      </mat-select>
+    </mat-form-field>
+      <!--<mat-form-field appearance="outline">
+        <mat-label>Stop Name</mat-label>
+        <input matInput placeholder="City">
+    </mat-form-field>-->
+
+    
+    </form>
+</div>
+<div mat-dialog-action [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+    <button mat-raised-button color="primary" style="margin-left: 8px;" (click)="addFlight()">{{actionBtn}}</button>
+
+</div>

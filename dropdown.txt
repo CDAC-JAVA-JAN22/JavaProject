@@ -1,0 +1,48 @@
+@GetMapping("/getAllCompany")
+     public ResponseEntity<List<Company>> getAllCompany()
+     {
+          List<Company> allCompany=flightService.getAllCompany();
+          return new ResponseEntity<List<Company>>(allCompany,HttpStatus.OK);
+     }
+
+
+
+     public List<Company> getAllCompany(){
+          System.out.println("in service");
+          return companyDao.findAll();
+     }
+
+
+
+forntEnd ::
+
+
+<mat-form-field appearance="outline">
+        <mat-label>Company</mat-label>
+        <mat-select formControlName="company" placeholder="Company Name">
+            <!--<mat-option value="Indigo">Indigo</mat-option>
+            <mat-option value="Air India">Air India</mat-option>
+            <mat-option value="Qatar">Qatar</mat-option>
+            <mat-option value="Vistara">Vistara</mat-option>
+            <mat-option value="SpiceJet">SpiceJet</mat-option>
+            <mat-option value="Kingfisher">Kingfisher</mat-option>
+            <mat-option value="Jet Airways">Jet Airways</mat-option>-->
+
+            <mat-option *ngFor="let company of companyData" value="{{company.companyName}}">
+              {{company.companyName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+
+TS:
+
+this.api.getCompany().subscribe({
+     next:(res)=>{
+        this.companyData=res;
+        console.log(this.companyData)
+        //this.allCompany=res.companyData
+      
+     }
+   })
